@@ -8,7 +8,7 @@ const Home = () => {
 
     useEffect(() => {
         const getCourses = async () => {
-            await axios.get("http://localhost:8080/courses")
+            await axios.get("https://learning-api-api-main.vercel.app/courses")
                 .then(res => {
                     setCourses(res.data)
                 }).catch(error => {

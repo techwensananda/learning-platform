@@ -35,7 +35,7 @@ const Register = () => {
                 formData.append("avatar", selectedImages[0].file);
 
 
-                axios.post("http://localhost:8080/profile", formData, {
+                axios.post("https://learning-api-api-main.vercel.app/profile", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
@@ -43,7 +43,7 @@ const Register = () => {
                     .then((res) => {
                         console.log(res?.data?.result?.filename);
                         const profile = {
-                            displayName: registerdata.fullname, photoURL: `http://localhost:8080/${res?.data?.result?.filename}`
+                            displayName: registerdata.fullname, photoURL: `https://learning-api-api-main.vercel.app/${res?.data?.result?.filename}`
                         }
                         updateProfileUser(profile)
                     });
@@ -86,7 +86,7 @@ const Register = () => {
         // formData.append("avatar", selectedImages[0].file);
 
 
-        // await axios.post("http://localhost:8080/profile", formData, {
+        // await axios.post("https://learning-api-api-main.vercel.app/profile", formData, {
         //     headers: {
         //         "Content-Type": "multipart/form-data",
         //     },
@@ -109,7 +109,7 @@ const Register = () => {
         // }
 
         // axios
-        //     .post("http://localhost:8080/api/v1/auth/fileupload", formData, {
+        //     .post("https://learning-api-api-main.vercel.app/api/v1/auth/fileupload", formData, {
         //         headers: {
         //             "Content-Type": "multipart/form-data",
         //         },
