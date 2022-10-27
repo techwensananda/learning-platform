@@ -4,14 +4,25 @@ import { Link, useLocation } from 'react-router-dom'
 import { AuthContext } from '../contexts/UserContext'
 import usericon from '../assets/usericon.jpg'
 import logo from '../assets/logo.svg'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 
 const Header = () => {
     const { user, signOutUser } = useContext(AuthContext)
+    const [theme, setTheme] = useState("light-theme")
+    const handleTheme = event => {
+        theme == "light-theme" ? setTheme("night-mode") : setTheme("light-theme")
+    }
+
+
+    useEffect(() => {
+        document.body.className = theme
+    }, [theme])
 
     const location = useLocation();
     const pathname = location.pathname;
-
+    console.log(theme)
     return (
         <header className="header header-page">
             <div className="header-fixed">
@@ -71,7 +82,7 @@ const Header = () => {
                                     <Link onClick={signOutUser} className="nav-link header-sign">Sign Out</Link>}
                             </li> */}
                             <li className=" night-mode">
-                                <input type="checkbox" className="checkbox" id="checkbox" />
+                                <input type="checkbox" onChange={() => handleTheme()} className="checkbox" id="checkbox" />
                                 <label htmlFor="checkbox" className="checkbox-label">
                                     <i className="fas fa-moon" />
                                     <i className="fas fa-sun" />

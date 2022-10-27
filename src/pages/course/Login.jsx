@@ -74,7 +74,7 @@ const Login = () => {
                                 <div className="img-logo">
                                     <img src="assets/img/logo.svg" className="img-fluid" alt="Logo" />
                                     <div className="back-home">
-                                        <a href="index.html">Back to Home</a>
+                                        <Link to="/">Back to Home</Link>
                                     </div>
                                 </div>
                                 <h1>Sign into Your Account</h1>

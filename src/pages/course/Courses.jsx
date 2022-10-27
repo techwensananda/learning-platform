@@ -29,14 +29,14 @@ const Courses = () => {
             <Header />
             <div className="breadcrumb-bar">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-md-12 col-12">
-                            <div className="breadcrumb-list">
+                    <div className="row ">
+                        <div className="col-md-12 col-12 ">
+                            <div className="breadcrumb-list ">
                                 <nav aria-label="breadcrumb" className="page-breadcrumb">
-                                    <ol className="breadcrumb">
-                                        <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li className="breadcrumb-item" aria-current="page">Pages</li>
-                                        <li className="breadcrumb-item" aria-current="page">Blog List</li>
+                                    <ol className="breadcrumb ">
+                                        <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                                        <li className="breadcrumb-item" aria-current="page">Courses</li>
+
                                     </ol>
                                 </nav>
                             </div>
@@ -68,9 +68,9 @@ const Courses = () => {
                                                 <div className="product-content">
                                                     <div className="course-group d-flex">
                                                         <div className="course-group-img d-flex">
-                                                            <a href="instructor-profile.html"><img src="assets/img/user/user2.jpg" alt className="img-fluid" /></a>
+                                                            <Link to={`/courses/${course?.title?.toLowerCase().split(' ').join("-")}`}><img src="assets/img/user/user2.jpg" alt className="img-fluid" /></Link>
                                                             <div className="course-name">
-                                                                <h4><a href="instructor-profile.html">{course?.instructor}</a></h4>
+                                                                <h4><Link to={`/courses/${course?.title?.toLowerCase().split(' ').join("-")}`}>{course?.instructor}</Link></h4>
                                                                 <p>Instructor</p>
                                                             </div>
                                                         </div>
@@ -78,7 +78,7 @@ const Courses = () => {
                                                             <a href="#"><i className="fa-regular fa-heart" /></a>
                                                         </div>
                                                     </div>
-                                                    <h3 className="title instructor-text"><a href="course-details.html">{course?.title}</a></h3>
+                                                    <h3 className="title instructor-text"><Link to={`/courses/${course?.title?.toLowerCase().split(' ').join("-")}`}>{course?.title}</Link></h3>
                                                     <div className="course-info d-flex align-items-center">
                                                         <div className="rating-img d-flex align-items-center">
                                                             <img src="assets/img/icon/icon-01.svg" alt />

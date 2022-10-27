@@ -28,23 +28,26 @@ const Register = () => {
                 const user = res.user;
                 const formData = new FormData();
 
-                for (let j = 0; j < selectedImages.length; j++) {
-                    formData.append("avatar", selectedImages[j].file);
-                }
 
-                axios.post("http://localhost:5000/profile", formData, {
+                formData.append("avatar", selectedImages[0].file);
+
+
+                axios.post("http://localhost:8080/profile", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
                 })
                     .then((res) => {
-                        console.log(res);
+                        console.log(res?.data?.result?.filename);
+                        const profile = {
+                            displayName: registerdata.fullname, photoURL: `http://localhost:8080/${res?.data?.result?.filename}`
+                        }
+                        updateProfileUser(profile)
                     });
+                navigate("/")
 
 
-                // navigate("/")
-                const profile = { displayName: registerdata.fullname, photoURL: selectedImages[0]?.url }
-                updateProfileUser(profile)
+
             })
             .catch(error => {
                 console.error(error)
@@ -74,20 +77,20 @@ const Register = () => {
 
         // FOR BUG IN CHROME
         event.target.value = "";
-        const formData = new FormData();
+        // const formData = new FormData();
 
 
-        formData.append("avatar", selectedImages[0].file);
+        // formData.append("avatar", selectedImages[0].file);
 
 
-        await axios.post("http://localhost:5000/profile", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        })
-            .then((res) => {
-                console.log(res);
-            });
+        // await axios.post("http://localhost:8080/profile", formData, {
+        //     headers: {
+        //         "Content-Type": "multipart/form-data",
+        //     },
+        // })
+        //     .then((res) => {
+        //         console.log(res);
+        //     });
     };
 
 
