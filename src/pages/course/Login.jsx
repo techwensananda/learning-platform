@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/UserContext'
 
 const Login = () => {
-    const { user, loginWithGoogle, loginUser } = useContext(AuthContext)
+    const { user, loginWithGoogle, loginUser, loginWithGithub } = useContext(AuthContext)
     const navigate = useNavigate()
     const [logindata, setloginData] = useState({
 
@@ -32,6 +32,12 @@ const Login = () => {
 
 
     }
+
+    useEffect(() => {
+        if (user?.uid) {
+            navigate("/")
+        }
+    }, [user])
 
     return (
         <div className="main-wrapper log-wrap">
@@ -110,7 +116,7 @@ const Login = () => {
                             <div className="sign-google">
                                 <ul>
                                     <li onClick={loginWithGoogle} ><Link ><img src="assets/img/net-icon-01.png" className="img-fluid" alt="Logo" /> Sign In using Google</Link></li>
-                                    <li><a href="#"><img src="assets/img/net-icon-02.png" className="img-fluid" alt="Logo" />Sign In using Facebook</a></li>
+                                    <li onClick={loginWithGithub}><Link><img src="assets/img/net-icon-03.png" className="img-fluid" alt="Logo" />Sign In using Github</Link></li>
                                 </ul>
                             </div>
                             <p className="mb-0">New User ? <Link to="/register">Create an Account</Link></p>

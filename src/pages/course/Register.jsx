@@ -5,10 +5,11 @@ import { AuthContext } from '../../contexts/UserContext';
 import usericon from '../../assets/usericon.jpg'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const Register = () => {
     const navigate = useNavigate()
-    const { user, createUser, updateProfileUser, loginWithGoogle } = useContext(AuthContext)
+    const { user, createUser, updateProfileUser, loginWithGoogle, loginWithGithub } = useContext(AuthContext)
     const [registerdata, setRegisterData] = useState({
         fullname: "",
         email: "",
@@ -19,6 +20,8 @@ const Register = () => {
         const { name, value } = e.target;
         setRegisterData(prev => ({ ...prev, [name]: value }))
     }
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -93,7 +96,11 @@ const Register = () => {
         //     });
     };
 
-
+    useEffect(() => {
+        if (user?.uid) {
+            navigate("/")
+        }
+    }, [user])
     const uploadToserver = () => {
         const formData = new FormData();
 
@@ -102,7 +109,7 @@ const Register = () => {
         // }
 
         // axios
-        //     .post("https://learning-platform-api.vercel.app/api/v1/auth/fileupload", formData, {
+        //     .post("http://localhost:8080/api/v1/auth/fileupload", formData, {
         //         headers: {
         //             "Content-Type": "multipart/form-data",
         //         },
@@ -212,10 +219,10 @@ const Register = () => {
                             <div className="sign-google">
                                 <ul>
                                     <li onClick={loginWithGoogle} ><Link ><img src="assets/img/net-icon-01.png" className="img-fluid" alt="Logo" /> Sign In using Google</Link></li>
-                                    <li><a href="#"><img src="assets/img/net-icon-02.png" className="img-fluid" alt="Logo" />Sign In using Facebook</a></li>
+                                    <li onClick={loginWithGithub}><Link ><img src="assets/img/net-icon-03.png" className="img-fluid" alt="Logo" />Sign In using Github</Link></li>
                                 </ul>
                             </div>
-                            <p className="mb-0">Already have an account? <a href="login.html">Sign in</a></p>
+                            <p className="mb-0">Already have an account? <Link to="/login">Sign in</Link></p>
                         </div>
                     </div>
                 </div>

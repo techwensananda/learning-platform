@@ -1,13 +1,19 @@
 import React, { createContext, useEffect, useState } from 'react'
 import app from '../firebase/firebase.config';
-import {getAuth ,createUserWithEmailAndPassword ,signInWithEmailAndPassword, onAuthStateChanged, signOut , signInWithPopup, GoogleAuthProvider, updateProfile } from 'firebase/auth'
+import {getAuth ,createUserWithEmailAndPassword ,    getRedirectResult, GithubAuthProvider , signInWithEmailAndPassword, onAuthStateChanged, signOut , signInWithPopup, GoogleAuthProvider, updateProfile } from 'firebase/auth'
+
 
 export const AuthContext = createContext();
-const auth=getAuth(app)
-const provider = new GoogleAuthProvider();
+const auth = getAuth(app)
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 const UserContext = ({ children }) => {
+
   const [user, setUser] = useState({})
-  const [loading, setLoading]= useState(true)
+  const [loading, setLoading] = useState(true)
+
+  
+
   const createUser = (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password)
   }
@@ -21,7 +27,10 @@ const UserContext = ({ children }) => {
   }
 
  const loginWithGoogle = () => {
-  return signInWithPopup(auth, provider)
+   return signInWithPopup(auth, googleProvider)
+  }
+ const loginWithGithub = () => {
+  return signInWithPopup(auth, githubProvider)
   }
 
 
@@ -43,7 +52,7 @@ const UserContext = ({ children }) => {
     }
   },[])
   
-  const userInfo ={user ,updateProfileUser, createUser ,loginUser ,signOutUser ,loginWithGoogle ,loading}
+  const userInfo ={user ,updateProfileUser, createUser ,loginUser ,signOutUser ,loginWithGoogle ,loading ,loginWithGithub}
   return (
     <AuthContext.Provider  value={userInfo}>
     {children}

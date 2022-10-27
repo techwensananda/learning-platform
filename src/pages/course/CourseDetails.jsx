@@ -14,7 +14,7 @@ const CourseDetails = () => {
 
     useEffect(() => {
         const getCourseDetails = async () => {
-            await axios.get(`https://learning-platform-api.vercel.app/courses/${coursename}`)
+            await axios.get(`http://localhost:8080/courses/${coursename}`)
                 .then(res => {
                     setCourseDetails(res.data)
                 }).catch(error => {

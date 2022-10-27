@@ -22,7 +22,7 @@ const Header = () => {
 
     const location = useLocation();
     const pathname = location.pathname;
-    console.log(theme)
+    console.log(user?.uid)
     return (
         <header className="header header-page">
             <div className="header-fixed">
@@ -74,7 +74,7 @@ const Header = () => {
                                 <span className="status online" />
                             </span>}
                             <li className="nav-item">
-                                {!user?.email ? <> <Link to="/login" className="nav-link header-login" >Signin</Link>  <Link to="/register" className="nav-link header-sign" >Register</Link> </> :
+                                {!user?.uid ? <> <Link to="/login" className="nav-link header-login" >Signin</Link>  <Link to="/register" className="nav-link header-sign" >Register</Link> </> :
                                     <Link onClick={signOutUser} className="nav-link header-login">Sign Out</Link>}
                             </li>
                             {/* <li className="nav-item">
